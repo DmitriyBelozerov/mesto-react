@@ -1,9 +1,8 @@
 function PopupWithForm(props) {
     return (
-        <div className={props.isOpen ? 'popup popup_opened' : 'popup'}>
-                    {/* <div className={`popup  popup_type_${props.name}`}> */}
+        <div className={`popup  ${props.isOpen && 'popup_opened'}`}>
 
-            <div className="form">
+            <div className={`form form_type_${props.name}`}>
                 <button className="popup__close" type="button" aria-label="close" onClick={props.onClose}></button>
                 <h3 className="form__title">{props.title}</h3>
                 <form className="form__sending" action="#" name={`${props.name}`} noValidate>

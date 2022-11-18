@@ -9,7 +9,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
     const [userAvatar, setUserAvatar] = React.useState();
     const [cards, setCards] = React.useState([]);
 
-
     React.useEffect(() => {
         api.getProfile()
             .then(data => {
@@ -26,14 +25,13 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
                 setCards(data);
             })
             .catch(err => console.log(err))
-    }, [])
+    })
 
     return (
         <>
             <section className="profile">
                 <button className="profile__btn-sbmt-photo" type="button" aria-label="avatar" onClick={onEditAvatar}>
-                    <img src={userAvatar}
-                        alt="аватар пользователя" className="profile__avatar" />
+                    <img src={userAvatar} alt="аватар пользователя" className="profile__avatar" />
                 </button>
                 <div className="profile__info">
                     <h1 className="profile__name">{userName}</h1>
@@ -46,10 +44,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             <section className="galary">
                 <ul className="cards">
                     {cards.map(item => (
-                        <Card card={item} key={item._id} onCardClick={onCardClick}/>
+                        <Card card={item} key={item._id} onCardClick={onCardClick} />
                     ))}
-
-
                 </ul>
             </section>
         </>

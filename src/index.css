@@ -47,6 +47,6 @@
 @import url(./blocks/form/_confirmation-delete/form_confirmation-delete.css);
 @import url(./blocks/form/__submit/_confirmation-delete/form__submit_confirmation-delete.css);
 @import url(./blocks/form/__title/_confirmation-delete/form__title_confirmation-delete.css);
-@import url(./blocks/form/_submit-avatar/form_submit-avatar.css);
+@import url(./blocks/form/_type_submit-avatar/form_type_submit-avatar.css);
 @import url(./blocks/profile/__btn-sbmt-photo/profile__btn-sbmt-photo.css);
 @import url(./blocks/popup/__close/popup__close.css); 
