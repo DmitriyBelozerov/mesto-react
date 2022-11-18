@@ -31,12 +31,19 @@ function App() {
     setSelectedCard(!{});
   }
 
+  function handleEscPopupClose(evt) {
+    const keyNmbrEsc = Number(27);
+    if (evt.keyCode === keyNmbrEsc) {
+      closeAllPopups()
+    }
+  }
+
   function handleCardClick(card) {
     setSelectedCard(card);
   }
 
   return (
-    <div className="page">
+    <div className="page" onKeyDown={handleEscPopupClose}>
 
       <Header />
 
@@ -94,8 +101,9 @@ function App() {
       <ImagePopup
         isOpen={selectedCard}
         onClose={closeAllPopups}
-        name={'view-image'}
-      />
+        name={'view-image'}>
+      </ImagePopup>
+
 
     </div >
   );
