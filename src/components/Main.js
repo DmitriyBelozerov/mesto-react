@@ -17,7 +17,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
                 setUserAvatar(data.avatar);
             })
             .catch(err => console.log(err))
-    })
+    }, [])
 
     React.useEffect(() => {
         api.getCards()
@@ -25,7 +25,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
                 setCards(data);
             })
             .catch(err => console.log(err))
-    })
+    }, [])
 
     return (
         <>

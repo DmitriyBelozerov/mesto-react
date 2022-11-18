@@ -10,7 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(!{});
 
   function handleEditAvatarClick() {
     setisEditAvatarPopupOpen(true);
@@ -28,7 +28,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setisAddPlacePopupOpen(false);
     setisEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard(!{});
   }
 
   function handleCardClick(card) {
@@ -53,46 +53,43 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         title={'Редактировать профиль'}
-        children={<>
-          <input id="name" className="form__input form__input_type_name" type="text" name="inputName"
-            placeholder="Имя" minLength="2" maxLength="40" required />
-          <span id="error-name" className="form__error-message form__error-message_hiden"></span>
-          <input id="profession" className="form__input form__input_type_about" type="text" name="inputAbout"
-            placeholder="Профессия" minLength="2" maxLength="200" required />
-          <span id="error-profession" className="form__error-message form__error-message_hiden"></span>
-        </>}
         btnType={'Сохранить'}
-        name={'change-profile'}
-      />
+        name={'change-profile'}>
+        <input id="name" className="form__input form__input_type_name" type="text" name="inputName"
+          placeholder="Имя" minLength="2" maxLength="40" required />
+        <span id="error-name" className="form__error-message form__error-message_hiden"></span>
+        <input id="profession" className="form__input form__input_type_about" type="text" name="inputAbout"
+          placeholder="Профессия" minLength="2" maxLength="200" required />
+        <span id="error-profession" className="form__error-message form__error-message_hiden"></span>
+      </PopupWithForm>
+
 
       <PopupWithForm
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         title={'Новое место'}
-        children={<>
-          <input id="photo-name" className="form__input form__input_add_photo" type="text" name="inputPhotoName"
-            placeholder="Название" minLength="2" maxLength="30" required />
-          <span id="error-photo-name" className="form__error-message form__error-message_hiden"></span>
-          <input id="photo-url" className="form__input form__input_add_url" type="url" name="inputPhotoUrl"
-            placeholder="Ссылка" required />
-          <span id="error-photo-url" className="form__error-message form__error-message_hiden"></span>
-        </>}
         btnType={'Создать'}
-        name={'add-place'}
-      />
+        name={'add-place'} >
+        <input id="photo-name" className="form__input form__input_add_photo" type="text" name="inputPhotoName"
+          placeholder="Название" minLength="2" maxLength="30" required />
+        <span id="error-photo-name" className="form__error-message form__error-message_hiden"></span>
+        <input id="photo-url" className="form__input form__input_add_url" type="url" name="inputPhotoUrl"
+          placeholder="Ссылка" required />
+        <span id="error-photo-url" className="form__error-message form__error-message_hiden"></span>
+      </PopupWithForm>
+
 
       <PopupWithForm
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         title={'Обновить аватар'}
-        children={<>
-          <input id="avatar-url" className="form__input form__input_submit-avatar" type="url" name="avatar"
-            placeholder="Ссылка" required />
-          <span id="error-avatar-url" className="form__error-message form__error-message_hiden"></span>
-        </>}
         btnType={'Сохранить'}
-        name={'submit-avatar'}
-      />
+        name={'submit-avatar'}      >
+        <input id="avatar-url" className="form__input form__input_submit-avatar" type="url" name="avatar"
+          placeholder="Ссылка" required />
+        <span id="error-avatar-url" className="form__error-message form__error-message_hiden"></span>
+      </PopupWithForm>
+
 
       <ImagePopup
         isOpen={selectedCard}
