@@ -1,4 +1,21 @@
+import React from "react";
+import { TranslationContext } from "../contexts/CurrentUserContext";
+
+
 function Card({ card, onCardClick }) {
+    const currentUser = React.useContext(TranslationContext);
+
+    const isOwn = card.owner._id === currentUser._id;
+    const cardDeleteButtonClassName = (
+        `card__delete ${!isOwn && 'card__delete_hidden'}`
+    );
+
+    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    // Создаём переменную, которую после зададим в `className` для кнопки лайка
+    const cardLikeButtonClassName = `card__like ${isLiked && 'card__like_active'}`;
+
 
     function handleClick() {
         onCardClick(card);
@@ -6,13 +23,14 @@ function Card({ card, onCardClick }) {
 
     return (
         <li className="card">
+            {console.log(isLiked)}
             <img alt={card.name} className="card__photo" src={card.link} onClick={handleClick} />
             <h2 className="card__title">{card.name}</h2>
             <div className="card__like-section">
-                <button className="card__like " type="button" aria-label="like"></button>
+                <button className={cardLikeButtonClassName} type="button" aria-label="like"></button>
                 <span className="card__like-users">{card.likes.length}</span>
             </div>
-            <button className="card__delete " type="button" aria-label="delete"></button>
+            <button className={cardDeleteButtonClassName} type="button" aria-label="delete"></button>
         </li>
     )
 }

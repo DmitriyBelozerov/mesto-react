@@ -19,7 +19,7 @@ class Api {
         throw new Error('Ошибка при загрузке данных с сервера')
     }
 
-    getProfile() {
+    getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._header,
         })
