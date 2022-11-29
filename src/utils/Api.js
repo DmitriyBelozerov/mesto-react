@@ -26,15 +26,7 @@ class Api {
             .then(this._getJsonOrError)
     }
 
-
-    getCards() {
-        return fetch(`${this._baseUrl}/cards`, {
-            headers: this._header,
-        })
-            .then(this._getJsonOrError)
-    }
-
-    saveProfile(newName, newAbout) {
+    setUserInfo(newName, newAbout) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._header,
@@ -42,6 +34,13 @@ class Api {
                 name: `${newName}`,
                 about: `${newAbout}`
             }),
+        })
+            .then(this._getJsonOrError)
+    }
+
+    getCards() {
+        return fetch(`${this._baseUrl}/cards`, {
+            headers: this._header,
         })
             .then(this._getJsonOrError)
     }
@@ -68,21 +67,24 @@ class Api {
             .then(this._getJsonOrError)
     }
 
-    markLike(id) {
-        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-            method: 'PUT',
-            headers: this._header,
-        })
-            .then(this._getJsonOrError)
+    changeLikeCardStatus(id, isLiked) {
+        if (isLiked) {
+            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+                method: 'PUT',
+                headers: this._header,
+            })
+                .then(this._getJsonOrError)
+        } else {
+            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+                method: 'DELETE',
+                headers: this._header,
+            })
+                .then(this._getJsonOrError)
+        }
     }
 
-    deleteLike(id) {
-        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-            method: 'DELETE',
-            headers: this._header,
-        })
-            .then(this._getJsonOrError)
-    }
+
+
 
     submitAvatar(link) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {

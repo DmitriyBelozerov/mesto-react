@@ -1,22 +1,9 @@
 import React from "react";
-import api from '../utils/Api';
 import Card from "./Card";
 import { TranslationContext } from "../contexts/CurrentUserContext";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete }) {
     const currentUser = React.useContext(TranslationContext);
-
-
-    const [cards, setCards] = React.useState([]);
-
-    React.useEffect(() => {
-        api.getCards()
-            .then(data => {
-                setCards(data);
-            })
-            .catch(err => console.log(err))
-    }, [])
 
     return (
         <>
@@ -35,7 +22,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             <section className="galary">
                 <ul className="cards">
                     {cards.map(item => (
-                        <Card card={item} key={item._id} onCardClick={onCardClick} />
+                        <Card card={item} key={item._id} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} />
                     ))}
                 </ul>
             </section>

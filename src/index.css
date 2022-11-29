@@ -44,7 +44,7 @@
 @import url(./blocks/form/__submit/_type_disabled/form__submit_type_disabled.css);
 @import url(./blocks/card/__like-section/card__like-section.css);
 @import url(./blocks/card/__like-users/card__like-users.css);
-@import url(./blocks/form/_confirmation-delete/form_confirmation-delete.css);
+@import url(./blocks/form/_type_confirmation-delete/form_type_confirmation-delete.css);
 @import url(./blocks/form/__submit/_confirmation-delete/form__submit_confirmation-delete.css);
 @import url(./blocks/form/__title/_confirmation-delete/form__title_confirmation-delete.css);
 @import url(./blocks/form/_type_submit-avatar/form_type_submit-avatar.css);
