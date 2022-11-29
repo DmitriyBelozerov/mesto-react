@@ -30,11 +30,11 @@ function AddPlacePopup(props) {
             btnType={'Создать'}
             name={'add-place'} >
             <input id="photo-name" className="form__input form__input_add_photo" type="text"
-                onChange={handleChangeTitle} name="inputPhotoName"
+                value={''} onChange={handleChangeTitle} name="inputPhotoName"
                 placeholder="Название" minLength="2" maxLength="30" required />
             <span id="error-photo-name" className="form__error-message form__error-message_hiden"></span>
             <input id="photo-url" className="form__input form__input_add_url" type="url"
-                onChange={handleChangeLink} name="inputPhotoUrl"
+                value={''} onChange={handleChangeLink} name="inputPhotoUrl"
                 placeholder="Ссылка" required />
             <span id="error-photo-url" className="form__error-message form__error-message_hiden"></span>
         </PopupWithForm>
