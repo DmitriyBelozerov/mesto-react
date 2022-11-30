@@ -40,25 +40,24 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
-    .then((newCard) => {
-      setCards(state => state.map(c => c._id === card._id ? newCard : c));
-    })
-    .catch(err => console.log(err))
+      .then((newCard) => {
+        setCards(state => state.map(c => c._id === card._id ? newCard : c));
+      })
+      .catch(err => console.log(err))
   }
 
   function handleCardDelete() {
     isButtonConfirm('Удаляем...');
     api.deleteCard(itemDelete._id)
-      .then(
-        () => {
-          setCards(cards.filter(item => item._id !== itemDelete._id))
-        }
+      .then(() => {
+        setCards(cards.filter(item => item._id !== itemDelete._id))
+      }
       )
       .then(() => {
         closeAllPopups();
       })
       .catch(err => console.log(err))
-      .finally(()=>{
+      .finally(() => {
         isButtonConfirm('Да');
       })
   }
