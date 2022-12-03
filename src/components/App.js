@@ -134,7 +134,7 @@ function App() {
 
   return (
     <TranslationContext.Provider value={currentUser}>
-      <div className="page" onKeyDown={handleEscPopupClose}>
+      <div onKeyDown={handleEscPopupClose}>
         <Header />
         <Main
           onEditAvatar={handleEditAvatarClick}
