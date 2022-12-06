@@ -7,8 +7,11 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
+import PopupSignUp from "./PopupSignUp";
 import api from '../utils/Api';
 import { TranslationContext } from '../contexts/CurrentUserContext';
+import { Route, Switch } from 'react-router-dom';
+
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -134,47 +137,60 @@ function App() {
 
   return (
     <TranslationContext.Provider value={currentUser}>
+
       <div onKeyDown={handleEscPopupClose}>
         <Header />
-        <Main
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleConfirmDeletePopup}
-        />
+
+        <Switch>
+          <Route path='/sign-up'>
+            <PopupSignUp></PopupSignUp>
+          </Route>
+
+          <Route path='/sign-in'>
+          </Route>
+
+          <Route exact path='/'>
+            <Main
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={handleConfirmDeletePopup}
+            />
+            <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
+            />
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={closeAllPopups}
+              onAddPhotoCard={handleAddPlaceSubmit}
+            />
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+            />
+            <ImagePopup
+              isOpen={selectedCard}
+              onClose={closeAllPopups}
+              name={'view-image'}>
+            </ImagePopup>
+
+            <ConfirmDeletePopup
+              isOpen={isConfirmDeletePopup}
+              onClose={closeAllPopups}
+              onSubmit={handleCardDelete}
+              btnConfirm={btnConfirm}
+            >
+            </ConfirmDeletePopup>
+          </Route>
+        </Switch>
+
         <Footer />
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPhotoCard={handleAddPlaceSubmit}
-        />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
-        <ImagePopup
-          isOpen={selectedCard}
-          onClose={closeAllPopups}
-          name={'view-image'}>
-        </ImagePopup>
-
-        <ConfirmDeletePopup
-          isOpen={isConfirmDeletePopup}
-          onClose={closeAllPopups}
-          onSubmit={handleCardDelete}
-          btnConfirm={btnConfirm}
-        >
-        </ConfirmDeletePopup>
-
       </div >
     </TranslationContext.Provider>
   );

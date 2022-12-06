@@ -51,3 +51,5 @@
 @import url(./blocks/profile/__btn-sbmt-photo/profile__btn-sbmt-photo.css);
 @import url(./blocks/popup/__close/popup__close.css); 
 @import url(./blocks/card/__delete/_hiden/card__delete_hidden.css);
+@import url(./blocks/form/_type_sign/form_type_sign.css);
+@import url(./blocks/form/__input/_type_sign/form__input_type_sign.css);
