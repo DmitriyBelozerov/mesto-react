@@ -53,3 +53,11 @@
 @import url(./blocks/card/__delete/_hiden/card__delete_hidden.css);
 @import url(./blocks/form/_type_sign/form_type_sign.css);
 @import url(./blocks/form/__input/_type_sign/form__input_type_sign.css);
+@import url(./blocks/form/__submit/_type_sign/form__submit_type_sign.css);
+@import url(./blocks/form/__question/form__question.css);
+@import url(./blocks/form/__title/_type_sign/form__title_type_sign.css);
+@import url(./blocks/popup/_type_sign/popup_type_sign.css);
+@import url(./blocks/form/__submit/_type_InfoTooltip/form__submit_type_InfoTooltip.css);
+@import url(./blocks/form/__logo/form__logo.css);
+@import url(./blocks/form/_type_InfoTooltip/form_type_InfoTooltip.css);
+@import url(./blocks/form/__title/_type_InfoTooltip/form__title_type_InfoTooltip.css);

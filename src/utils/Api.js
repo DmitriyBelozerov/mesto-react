@@ -1,15 +1,48 @@
 const apiOptions = {
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52",
+    baseUrlAuth: "https://auth.nomoreparties.co",
     headers: {
         authorization: 'eedc1c72-62bc-4062-b0d7-5fb34f1900fa',
         'Content-Type': 'application/json'
     },
+
 }
+
+
+
+
+// export const register = (username, password, email) => {
+//   return fetch(`${BASE_URL}/auth/local/register`, {
+//     method: 'POST',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({username, password, email})
+//   })
+//   .then((response) => {
+//     try {
+//       if (response.status === 200){
+//         return response.json();
+//       }
+//     } catch(e){
+//       return (e)
+//     }
+//   })
+//   .then((res) => {
+//     return res;
+//   })
+//   .catch((err) => console.log(err));
+// };
+
+
 
 class Api {
     constructor(config) {
         this._header = config.headers;
         this._baseUrl = config.baseUrl;
+        this._baseUrlAuth = config.baseUrlAuth;
+
     }
 
     _getJsonOrError(res) {
@@ -17,6 +50,21 @@ class Api {
             return res.json();
         }
         throw new Error('Ошибка при загрузке данных с сервера')
+    }
+
+    register (newPassword, newEmail) {
+        return fetch(`${this._baseUrlAuth}/signup`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                password: `${newPassword}`,
+                email: `${newEmail}`
+            }),
+        })
+            .then(this._getJsonOrError)
     }
 
     getUserInfo() {

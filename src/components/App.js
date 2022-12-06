@@ -7,10 +7,13 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
-import PopupSignUp from "./PopupSignUp";
+import Register from "./Register";
+import Login from "./Login";
+import InfoTooltip from "./InfoTooltip";
 import api from '../utils/Api';
 import { TranslationContext } from '../contexts/CurrentUserContext';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 
 
 function App() {
@@ -23,6 +26,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [btnConfirm, isButtonConfirm] = React.useState('Да');
+  const [loggedIn, setLoggedIn] = React.useState(true);
+
 
   React.useEffect(() => {
     api.getCards()
@@ -65,6 +70,9 @@ function App() {
       })
   }
 
+  api.register('Katmandu5227', 'roxl@mail.ru')
+  .then (res=> {console.log(res)})
+  .catch (err => console.log(err))
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -142,14 +150,30 @@ function App() {
         <Header />
 
         <Switch>
+
           <Route path='/sign-up'>
-            <PopupSignUp></PopupSignUp>
+            <Register></Register>
           </Route>
 
           <Route path='/sign-in'>
+            <Login></Login>
           </Route>
 
-          <Route exact path='/'>
+
+          <ProtectedRoute path='/'
+            loggedIn={loggedIn}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleConfirmDeletePopup}
+            component={Main}
+          />
+
+
+          {/* <Route exact path='/'>
             <Main
               onEditAvatar={handleEditAvatarClick}
               onEditProfile={handleEditProfileClick}
@@ -159,36 +183,38 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleConfirmDeletePopup}
             />
-            <EditProfilePopup
-              isOpen={isEditProfilePopupOpen}
-              onClose={closeAllPopups}
-              onUpdateUser={handleUpdateUser}
-            />
-            <AddPlacePopup
-              isOpen={isAddPlacePopupOpen}
-              onClose={closeAllPopups}
-              onAddPhotoCard={handleAddPlaceSubmit}
-            />
-            <EditAvatarPopup
-              isOpen={isEditAvatarPopupOpen}
-              onClose={closeAllPopups}
-              onUpdateAvatar={handleUpdateAvatar}
-            />
-            <ImagePopup
-              isOpen={selectedCard}
-              onClose={closeAllPopups}
-              name={'view-image'}>
-            </ImagePopup>
+          </Route> */}
 
-            <ConfirmDeletePopup
-              isOpen={isConfirmDeletePopup}
-              onClose={closeAllPopups}
-              onSubmit={handleCardDelete}
-              btnConfirm={btnConfirm}
-            >
-            </ConfirmDeletePopup>
-          </Route>
         </Switch>
+
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPhotoCard={handleAddPlaceSubmit}
+        />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+        <ImagePopup
+          isOpen={selectedCard}
+          onClose={closeAllPopups}
+          name={'view-image'}>
+        </ImagePopup>
+
+        <ConfirmDeletePopup
+          isOpen={isConfirmDeletePopup}
+          onClose={closeAllPopups}
+          onSubmit={handleCardDelete}
+          btnConfirm={btnConfirm}
+        >
+        </ConfirmDeletePopup>
 
         <Footer />
       </div >

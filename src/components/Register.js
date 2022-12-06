@@ -2,16 +2,19 @@ import React from "react";
 import SingUserForm from "./SingUserForm";
 
 
-function PopupSignUp(props) {
+function Register(props) {
+
+
     return (
         <SingUserForm
         name={'signUp'}
         btnType={'Зарегистрироваться'}
         title='Регистрация'
         >
-            <p>Уже зарегистрированы? Войти</p>
+      
+            <p className="form__question">Уже зарегистрированы? Войти</p>
         </SingUserForm>
     )
 }
 
-export default PopupSignUp;
+export default Register;
