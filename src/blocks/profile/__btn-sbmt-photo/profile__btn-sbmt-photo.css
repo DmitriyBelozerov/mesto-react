@@ -10,6 +10,7 @@
     border: 0;
     opacity: 1;
     transition: opacity 0.5s linear 0s;
+    cursor: pointer;
 }
 
 .profile__btn-sbmt-photo:hover {

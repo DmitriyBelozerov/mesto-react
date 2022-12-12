@@ -1,11 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { TranslationLogIn } from "../contexts/CurrentUserContext";
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
+  const loggedIn = React.useContext(TranslationLogIn);
+
   return (
     <Route>
       {() =>
-        props.loggedIn ? <Component {...props} /> : <Redirect to="./sign-in" />
+        loggedIn ? <Component {...props} /> : <Redirect to="./sign-in" />
       }
     </Route>
   );

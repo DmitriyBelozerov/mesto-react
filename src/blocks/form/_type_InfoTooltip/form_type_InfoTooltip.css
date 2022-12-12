@@ -2,3 +2,11 @@
     align-items: center;
     padding: 60px;
 }
+
+
+@media (max-width: 650px) {
+    .form_type_InfoTooltip {
+        min-height: 308px;
+        padding: 50px 18px 18px 18px;
+    }
+}

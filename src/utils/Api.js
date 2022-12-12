@@ -52,17 +52,43 @@ class Api {
         throw new Error('Ошибка при загрузке данных с сервера')
     }
 
-    register (newPassword, newEmail) {
+    register(newEmail, newPassword) {
         return fetch(`${this._baseUrlAuth}/signup`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              },
+            },
             body: JSON.stringify({
                 password: `${newPassword}`,
                 email: `${newEmail}`
             }),
+        })
+            .then(this._getJsonOrError)
+    }
+
+    logIn(emailIn, passwordIn) {
+        return fetch(`${this._baseUrlAuth}/signin`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                password: `${passwordIn}`,
+                email: `${emailIn}`
+            }),
+        })
+            .then(this._getJsonOrError)
+    }
+
+    getProfileInfo() {
+        return fetch(`${this._baseUrlAuth}/users/me`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem('jwt')}`
+            },
         })
             .then(this._getJsonOrError)
     }
@@ -130,9 +156,6 @@ class Api {
                 .then(this._getJsonOrError)
         }
     }
-
-
-
 
     submitAvatar(link) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
